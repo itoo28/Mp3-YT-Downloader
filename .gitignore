@@ -1,0 +1,7 @@
+node_modules/
+downloads/*
+!downloads/.gitkeep
+*.mp3
+*.zip
+.DS_Store
+*.log

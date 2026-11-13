@@ -1,0 +1,57 @@
+/* ── Custom styles ──────────────────────────────────────────────── */
+
+* { box-sizing: border-box; }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Tab buttons */
+.tab-btn {
+  color: #6b7280;
+  background: transparent;
+}
+.tab-btn:hover {
+  color: #d1d5db;
+}
+.tab-btn.active-tab {
+  background: #1f2937;
+  color: #f9fafb;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+
+/* Progress bar animation */
+.progress-bar {
+  transition: width 0.4s ease;
+}
+
+/* Pulse animation for active items */
+@keyframes soft-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .7; }
+}
+.pulse-active {
+  animation: soft-pulse 1.5s infinite;
+}
+
+/* Status badge colors */
+.badge-pending   { background: #374151; color: #9ca3af; }
+.badge-download  { background: #1e3a5f; color: #60a5fa; }
+.badge-convert   { background: #3b2f0a; color: #fbbf24; }
+.badge-done      { background: #064e3b; color: #6ee7b7; }
+.badge-error     { background: #4c0519; color: #fca5a5; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+
+/* Line clamp */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
