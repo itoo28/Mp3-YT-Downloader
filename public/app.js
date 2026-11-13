@@ -5,6 +5,29 @@ let currentJobId = null;
 let batchJobId = null;
 let eventSource = null;
 
+// ── Theme Management (Dark & Light Mode) ────────────────────────────────────
+
+function updateThemeUI(theme) {
+  const icon = document.getElementById('themeIcon');
+  const label = document.getElementById('themeLabel');
+  if (theme === 'light') {
+    document.documentElement.classList.remove('dark');
+    if (icon) icon.textContent = '☀️';
+    if (label) label.textContent = 'Light Mode';
+  } else {
+    document.documentElement.classList.add('dark');
+    if (icon) icon.textContent = '🌙';
+    if (label) label.textContent = 'Dark Mode';
+  }
+}
+
+function toggleTheme() {
+  const isDark = document.documentElement.classList.contains('dark');
+  const newTheme = isDark ? 'light' : 'dark';
+  localStorage.setItem('theme', newTheme);
+  updateThemeUI(newTheme);
+}
+
 // ── Tab Switching ────────────────────────────────────────────────────────────
 
 function switchTab(tab) {
@@ -146,19 +169,19 @@ async function startSingleDownload() {
 
 function createBatchCard(index, url) {
   return `
-    <div id="batch-item-${index}" class="bg-gray-900 border border-gray-800 rounded-xl p-4 space-y-2">
+    <div id="batch-item-${index}" class="bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-xl p-4 space-y-2 shadow-sm dark:shadow-none transition-colors duration-200">
       <div class="flex items-center justify-between gap-3">
         <div class="flex-1 min-w-0">
-          <p class="text-sm font-medium truncate" id="batch-title-${index}">${url}</p>
-          <p class="text-xs text-gray-500 truncate">${url}</p>
+          <p class="text-sm font-semibold truncate text-slate-800 dark:text-gray-100" id="batch-title-${index}">${url}</p>
+          <p class="text-xs text-slate-400 dark:text-gray-500 truncate">${url}</p>
         </div>
         <span id="batch-badge-${index}" class="badge-pending text-xs px-2.5 py-1 rounded-full font-medium whitespace-nowrap">Menunggu</span>
       </div>
-      <div class="w-full bg-gray-800 rounded-full h-1.5 overflow-hidden">
+      <div class="w-full bg-slate-100 dark:bg-gray-800 rounded-full h-1.5 overflow-hidden border border-slate-200 dark:border-transparent">
         <div id="batch-bar-${index}" class="progress-bar bg-gradient-to-r from-red-600 to-red-400 h-full rounded-full" style="width:0%"></div>
       </div>
       <div id="batch-actions-${index}" class="hidden pt-1">
-        <a id="batch-link-${index}" href="#" class="text-xs text-emerald-400 hover:text-emerald-300 font-medium">⬇ Unduh file ini</a>
+        <a id="batch-link-${index}" href="#" class="text-xs text-emerald-600 dark:text-emerald-400 hover:underline font-semibold">⬇ Unduh file ini</a>
       </div>
     </div>
   `;
@@ -267,10 +290,18 @@ function openFolder() {
   fetch('/api/open-folder', { method: 'POST' });
 }
 
-// ── Keyboard shortcut: Enter on single URL input ────────────────────────────
+// ── Inisialisasi DOM ─────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('singleUrl').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') fetchInfo();
-  });
+  // Sync state tombol tema dengan preferensi yang tersimpan
+  const currentSaved = localStorage.getItem('theme') || 'dark';
+  updateThemeUI(currentSaved);
+
+  // Shortcut Enter pada input single URL
+  const singleInput = document.getElementById('singleUrl');
+  if (singleInput) {
+    singleInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') fetchInfo();
+    });
+  }
 });

@@ -9,16 +9,27 @@ body {
 
 /* Tab buttons */
 .tab-btn {
-  color: #6b7280;
+  color: #64748b;
   background: transparent;
 }
 .tab-btn:hover {
-  color: #d1d5db;
+  color: #0f172a;
+}
+.dark .tab-btn {
+  color: #9ca3af;
+}
+.dark .tab-btn:hover {
+  color: #f3f4f6;
 }
 .tab-btn.active-tab {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+}
+.dark .tab-btn.active-tab {
   background: #1f2937;
   color: #f9fafb;
-  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 /* Progress bar animation */
@@ -35,18 +46,28 @@ body {
   animation: soft-pulse 1.5s infinite;
 }
 
-/* Status badge colors */
-.badge-pending   { background: #374151; color: #9ca3af; }
-.badge-download  { background: #1e3a5f; color: #60a5fa; }
-.badge-convert   { background: #3b2f0a; color: #fbbf24; }
-.badge-done      { background: #064e3b; color: #6ee7b7; }
-.badge-error     { background: #4c0519; color: #fca5a5; }
+/* Status badge colors - Light Mode */
+.badge-pending   { background: #e2e8f0; color: #475569; }
+.badge-download  { background: #dbeafe; color: #1d4ed8; }
+.badge-convert   { background: #fef3c7; color: #b45309; }
+.badge-done      { background: #d1fae5; color: #047857; }
+.badge-error     { background: #fee2e2; color: #b91c1c; }
+
+/* Status badge colors - Dark Mode */
+.dark .badge-pending   { background: #374151; color: #9ca3af; }
+.dark .badge-download  { background: #1e3a5f; color: #60a5fa; }
+.dark .badge-convert   { background: #3b2f0a; color: #fbbf24; }
+.dark .badge-done      { background: #064e3b; color: #6ee7b7; }
+.dark .badge-error     { background: #4c0519; color: #fca5a5; }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+.dark ::-webkit-scrollbar-thumb { background: #374151; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
 
 /* Line clamp */
 .line-clamp-2 {
